@@ -53,9 +53,19 @@ module.exports = class RequestHandler {
         }
         return fetch(`https://discord.com/api/${endpoint}`, options)
             .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                if(response.headers.get("Content-Type") &&
+                    !response.headers.get("Content-Type").includes("application/json")){
+                    return response;
+                }
                 this.rateLimit.remaining = response.headers.get('X-RateLimit-Remaining');
                 this.rateLimit.resetAfter = response.headers.get('X-RateLimit-Reset-After');
                 return response.json();
+            }).catch((error) => {
+                console.error(error);
+                return error;
             });
     }
 }

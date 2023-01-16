@@ -47,7 +47,7 @@ module.exports = class WebSocket {
         }, this.heart)
       }
       //console.log(t, s, op);
-
+      this._client.emit("raw", (t,s,op,d))
       if (t && t.toLowerCase() == "ready") {
         this.session_id = d.session_id;
         this.session_type = d.session_type;

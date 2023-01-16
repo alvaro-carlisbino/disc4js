@@ -1,12 +1,15 @@
 {
   "name": "disc4js",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "author": "Bryzzen",
+  "main": "./index.js",
   "license": "MIT",
   "dependencies": {
     "ws": "^8.12.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18"
-  }
+  },
+  "typings": "./index.d.ts",
+  "description": "A NodeJS Discord API WebSocket libary"
 }
