@@ -1,0 +1,12 @@
+{
+  "name": "disc4js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
+}
