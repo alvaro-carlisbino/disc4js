@@ -59,13 +59,30 @@ module.exports = class Guild{
         if(!member || typeof member !== "string" && !options || typeof options !== "object") throw new Error("To ban a member specify a ID and specify a options")
         if(options.delete_message_seconds < 0 || options.delete_message_seconds > 604800) throw new Error("Invalid Options")
         if(options.delete_message_days < 0 || options.delete_message_days > 7) throw new Error("Invalid Options");
+        const mem = this.members.find((m) => m.user.id == member)
+        if(!mem) throw new Error("Invalid ID");
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest(`PUT`, `guilds/${this.id}/bans/${member}`, options)
             if(response.status == 204){
-                this.members.splice(this.members.indexOf(this.members.find((m) => m.id == member)), 1)
+                this.members.splice(this.members.indexOf(mem), 1)
                 return resolve(true);
             }else {
                 throw new Error(response)
+            }
+        })
+    }
+
+    async removeBan(id){
+        if(!id || typeof id !== "string") throw new Error("The id id needed")
+
+        if(!/^[0-9]{17,19}$/.test(id)) throw new Error("This ID is INVALID")
+
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("DELETE", `guilds/${this.id}/bans/${id}`, {})
+            if(response.status == 204){
+                resolve(true)
+            }else {
+                throw new Error(resolve)
             }
         })
     }

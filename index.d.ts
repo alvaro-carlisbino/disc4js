@@ -47,6 +47,9 @@ declare namespace Disc4js{
         content: string;
         channel: Channel;
         id: string;
+
+        pin(): Promise<boolean>;
+        unPin(): Promise<boolean>;
     }
 
     interface MessageReference{
@@ -87,9 +90,26 @@ declare namespace Disc4js{
         sendMessage(content: ContentMessage): Promise<PartialMessage>;
     }
 
+    interface LogEntry{
+        user: User;
+        target: string;
+        changes: any[];
+        guild: Guild;
+    }
+
     interface EventListeners {
-        message: [Message];
+        message: [message: Message];
         ready: []
+
+        messageUpdate: [oldMessage: Message, newMessage: Message]
+        channelUpdate: [oldChannel: Channel, newChannel: Channel]
+        guildAuditLogEntryCreate: [log: LogEntry]
+
+        messageDeleted: [message: Message]
+        guildMemberAdd: [member: Member]
+        guildMemberRemove: [member: Member]
+        guildMemberUpdate: [oldMember: Member, newMember: Member]
+        guildDelete: [guild: Guild]
     }
 
     interface User {
@@ -150,5 +170,8 @@ declare namespace Disc4js{
         users: User[];
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;
+
+        once<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
+        once(event: string, listener: (...args: any[]) => void): this;
     }
 }
