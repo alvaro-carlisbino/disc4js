@@ -9,6 +9,7 @@ module.exports = class Member{
         {
             this.roles.push(new Role(role))
         }
+
         this.user = new User(d.user, client) || null
         client.users.push(this.user)
         this.joined_at = d.joined_at;

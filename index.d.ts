@@ -96,6 +96,8 @@ declare namespace Disc4js{
         id: string;
         flags: number;
         bitrate: number;
+
+        join(mute: boolean, deaf: boolean): Promise<void>;
     }
 
     interface Channel{
@@ -189,6 +191,8 @@ declare namespace Disc4js{
         publicFlags: number;
         id: string;
         presence?: Presence;
+
+        createDM(): Promise<ChannelDM>;
     }
 
     interface Member{

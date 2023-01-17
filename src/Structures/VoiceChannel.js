@@ -12,9 +12,20 @@ module.exports = class VoiceChannel{
         this.id = d.id;
         this.flags = d.flags;
         this.bitrate = d.bitrate;
+        this.guild = guild;
+        this._client = client;
     }
 
-    async join(){
-
+    async join(mute, deaf){
+        if(mute && typeof mute !== "boolean" || deaf && typeof deaf !== "boolean") throw new Error(`Invalid mute and deaf`)
+        this._client.ws.ws.send(JSON.stringify({
+            op: 4,
+            d: {
+                channel_id: this.id,
+                guild_id: this.guild.id,
+                self_mute: mute || false,
+                self_deaf: deaf || false
+            }
+        }))
     }
 }

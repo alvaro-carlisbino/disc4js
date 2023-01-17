@@ -49,8 +49,10 @@ module.exports = class WebSocket {
         //console.log(d)
         this.lastResponse = Date.now()
         this.ping = ~~(this.lastResponse - this.lastHello)
+      }else if(op == 2){
+        console.log(d)
       }
-      //console.log(t, s, op);
+      console.log(t, s, op);
       this._client.emit("raw", (t,s,op,d))
       if(t){
         new (require(`../Events/${t.toLowerCase()}.js`))(
