@@ -50,6 +50,8 @@ declare namespace Disc4js{
 
         pin(): Promise<boolean>;
         unPin(): Promise<boolean>;
+
+        edit(content: ContentMessage): Promise<Message>;
     }
 
     interface MessageReference{
@@ -60,19 +62,6 @@ declare namespace Disc4js{
     interface ContentMessage{
         content?: string;
         message_reference?: MessageReference;
-    }
-
-    interface PartialMessage{
-        id: string;
-        type: number;
-        content: string;
-        channel: Channel;
-        user: User;
-        embeds: any[];
-        pinned: boolean;
-        tts: boolean;
-        timestamp: string;
-        flags: number;
     }
 
     interface Channel{
@@ -88,7 +77,7 @@ declare namespace Disc4js{
         lastMessage: string;
         messages: Message[]
 
-        sendMessage(content: ContentMessage): Promise<PartialMessage>;
+        sendMessage(content: ContentMessage): Promise<Message>;
     }
 
     interface LogEntry{
@@ -180,6 +169,10 @@ declare namespace Disc4js{
         user: User;
         channel: ChannelDM;
         id: string;
+
+        pin(): Promise<boolean>;
+        unPin(): Promise<boolean>;
+        edit(content: ContentMessage): Promise<Message>;
     }
 
     interface ChannelDM{
@@ -189,7 +182,7 @@ declare namespace Disc4js{
         id: string;
         messages: MessageDM[]
 
-        sendMessage(content: ContentMessage): Promise<PartialMessage>;
+        sendMessage(content: ContentMessage): Promise<MessageDM>;
     }
 
     interface Guild{

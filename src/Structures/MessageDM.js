@@ -38,4 +38,18 @@ module.exports = class MessageDM{
             }
         })
     }
+
+    async edit(content) {
+        if (!content || typeof content !== 'object') {
+            throw new Error('Invalid content. Content must be a valid object.');
+        }
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("PATCH", `channels/${this.channel.id}/messages/${this.id}`, content);
+            if(response.content){
+                return resolve(new Message(response, this._client))
+            }else {
+                throw new Error(response)
+            }
+        })
+    }
 }

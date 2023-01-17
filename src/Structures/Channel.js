@@ -21,7 +21,7 @@ module.exports = class Channel {
         }
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest("POST", `channels/${this.id}/messages`, content);
-            resolve(new Message(response, this._client, this));
+            resolve(new Message(response, this._client));
         })
     }
 }

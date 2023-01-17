@@ -12,4 +12,9 @@ module.exports = class User{
     setPresence(presence){
         this.presence = presence;
     }
+
+    async getPresence(){
+
+    }
+
 }
