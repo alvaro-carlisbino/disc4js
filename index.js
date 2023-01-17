@@ -1,4 +1,1 @@
-module.exports = {
-    Client: require("./src/Client/Client"),
-    RequestHandler: require("./src/Util/RequestHandler")
-}
+module.exports = require("./src/Client/Client")
