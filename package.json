@@ -1,6 +1,6 @@
 {
   "name": "disc4js",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "author": "Bryzzen",
   "main": "./index.js",
   "license": "MIT",
@@ -12,6 +12,19 @@
     "@types/node": "^18.11.18"
   },
   "typings": "./index.d.ts",
+  "engines": {
+    "node": "^=10.4.0"
+  },
+  "keywords": [
+    "discord",
+    "wrapper",
+    "disc4js",
+    "api",
+    "discordapi",
+    "discordapp",
+    "bot",
+    "discordbot"
+  ],
   "description": "A NodeJS Discord API WebSocket libary",
   "repository": {
     "type": "git",
