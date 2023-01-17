@@ -110,6 +110,35 @@ declare namespace Disc4js{
         guildMemberRemove: [member: Member]
         guildMemberUpdate: [oldMember: Member, newMember: Member]
         guildDelete: [guild: Guild]
+        presenceUpdate: [user: User]
+
+        typingStart: [guild: Guild, channel: Channel, member: Member]
+    }
+
+    interface PresenceGame{
+        type: number;
+        session_id?: string;
+        name: string;
+        id: string;
+        created_at: number;
+    }
+
+    interface PresenceClientStatus{
+        web: string;
+    }
+
+    interface PresenceActivities{
+        type: number;
+        name: string;
+        id: string;
+        created_ate: number;
+    }
+
+    interface Presence{
+        status: string;
+        game?: PresenceGame[]
+        clientStatus: PresenceClientStatus
+        activities: PresenceActivities[]
     }
 
     interface User {
@@ -119,6 +148,7 @@ declare namespace Disc4js{
         discriminator: string;
         publicFlags: number;
         id: string;
+        presence?: Presence;
     }
 
     interface Member{

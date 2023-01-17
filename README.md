@@ -1,7 +1,9 @@
 ## Disc4js
 A discord websocket package
 
-# Hello to my package!
+# Hello to Disc4js
+
+It's a simple discord library, if u need help or support, send message to me: ````719986033583849502````
 
 Example ping command:
 

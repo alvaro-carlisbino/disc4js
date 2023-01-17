@@ -1,5 +1,4 @@
-const PartialMessage = require("./PartialMessage.js");
-
+const Message = require("./Message.js")
 module.exports = class Channel {
     constructor(d, client, guild) {
         this.version = d.version;
@@ -22,7 +21,7 @@ module.exports = class Channel {
         }
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest("POST", `channels/${this.id}/messages`, content);
-            resolve(new PartialMessage(response, this._client, this));
+            resolve(new Message(response, this._client, this));
         })
     }
 }

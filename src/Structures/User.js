@@ -8,4 +8,8 @@ module.exports = class User{
         this.tag = this.username+"#"+this.discriminator;
         this.publicFlags = d.public_flags;
     }
+
+    setPresence(presence){
+        this.presence = presence;
+    }
 }
