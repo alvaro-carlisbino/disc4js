@@ -1,4 +1,4 @@
-const User = require("./User");
+const User = require("./UserClass");
 module.exports = class MessageDM{
     constructor(d, client) {
         this.type = d.type;

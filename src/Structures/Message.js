@@ -1,4 +1,4 @@
-const User = require("./User.js")
+const User = require("./UserClass.js")
 const Member = require("./Member.js")
 module.exports = class Message{
     constructor(d, client) {

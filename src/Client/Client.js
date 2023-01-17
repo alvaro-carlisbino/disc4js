@@ -2,7 +2,7 @@ const WebSocket = require("../ws/WebSocket")
 const EventEmitter = require("events")
 const RequestHandler = require("../Util/RequestHandler.js")
 
-const User = require("../Structures/User.js")
+const User = require("../Structures/UserClass.js")
 
 module.exports = class Client extends EventEmitter{
     constructor(token, options){
