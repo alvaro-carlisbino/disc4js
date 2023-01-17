@@ -13,8 +13,4 @@ module.exports = class User{
         this.presence = presence;
     }
 
-    async getPresence(){
-
-    }
-
 }

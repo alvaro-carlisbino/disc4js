@@ -4,8 +4,8 @@ module.exports = class Channel {
         this.version = d.version;
         this.type = d.type;
         this.position = d.position;
-        this.permissions = d.permissions_overwrites;
-        this.parentID = d.parent_id;
+        this.permissions = d.permission_overwrites;
+        this.parent = client.channels.find((c) => c.id == d.parent_id) || d.parent_id;
         this.nsfw = d.nsfw;
         this.name = d.name;
         this.id = d.id;

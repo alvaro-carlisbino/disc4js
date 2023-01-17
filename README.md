@@ -20,7 +20,9 @@ client.once("ready", () => {
 
 client.on("message", async(message) => {
     if(message.content == "!ping") {
-        message.channel.sendMessage(`Pong!`)
+        message.channel.sendMessage({
+            content: `Pong!`
+    })
     }
 })
 ````

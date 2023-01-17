@@ -1,6 +1,9 @@
 const WebSocket = require("../ws/WebSocket")
 const EventEmitter = require("events")
 const RequestHandler = require("../Util/RequestHandler.js")
+
+const User = require("../Structures/User.js")
+
 module.exports = class Client extends EventEmitter{
     constructor(token, options){
         super({})
@@ -24,5 +27,16 @@ module.exports = class Client extends EventEmitter{
 
     putGuild(guild){
         this.guilds.push(guild);
+    }
+
+    async fetchUser(id){
+        if(!id || typeof id !== "string") throw new Error("The id id needed")
+
+        if(!/^[0-9]{17,19}$/.test(id)) throw new Error("This ID is INVALID")
+
+        return new Promise(async (resolve, reject) => {
+            const response = await this.fetch.makeRequest(`GET`, `users/${id}`)
+            return resolve(new User(response) || response)
+        })
     }
 }

@@ -15,6 +15,7 @@ module.exports = class Member{
         this.deaf = d.deaf;
         this.mute = d.mute;
         this.permissions = d.permissions;
+        this.voice;
     }
 
 }

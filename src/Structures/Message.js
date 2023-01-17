@@ -11,10 +11,12 @@ module.exports = class Message{
         this.guildID = d.guild_id;
         this.guild = client.guilds.find((g) => g.id == this.guildID) || client.channels.find((c) => c.id == d.channel_id)._guild || client.guilds.find((g) => g.id == d.message_reference.guild_id)
         this.content = d.content;
+        //console.log(d)
         this.user = client.users.find((u) => u.id == d.author.id) || new User(d.author, client)
         this.channel = client.channels.find((c) => c.id == d.channel_id)
         this.id = d.id;
         this._client = client;
+        this.reactions = [];
         this.member = this.guild.members.find((m) => m.user.id == d.author.id)
     }
 

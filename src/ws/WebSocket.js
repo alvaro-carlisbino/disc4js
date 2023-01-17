@@ -9,6 +9,7 @@ module.exports = class WebSocket {
     this.session_id = '';
     this.session_type = '';
     this._trace = '';
+    this.ping = 0;
     this.heart = 0;
     this.ws = new ws("wss://gateway.discord.gg", {});
     this.ws.on("open", () => {
@@ -42,7 +43,12 @@ module.exports = class WebSocket {
             "op": 1,
             "d": Date.now()
           }));
+          this.lastHello = Date.now()
         }, this.heart)
+      }else if(op == 11){
+        //console.log(d)
+        this.lastResponse = Date.now()
+        this.ping = ~~(this.lastResponse - this.lastHello)
       }
       //console.log(t, s, op);
       this._client.emit("raw", (t,s,op,d))

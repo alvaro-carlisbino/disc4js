@@ -37,6 +37,15 @@ declare namespace Disc4js{
         available: boolean | undefined;
     }
 
+    interface Reaction{
+        emoji: Emoji | {name: string, id: null}
+        channel: Channel;
+        message: Message | MessageDM;
+        guild?: Guild;
+        member?: Member;
+        user: User
+    }
+
     interface Message {
         type: number;
         tts: boolean;
@@ -47,6 +56,7 @@ declare namespace Disc4js{
         content: string;
         channel: Channel;
         id: string;
+        reactions: Reaction[];
 
         pin(): Promise<boolean>;
         unPin(): Promise<boolean>;
@@ -64,13 +74,37 @@ declare namespace Disc4js{
         message_reference?: MessageReference;
     }
 
+    interface Permission{
+        type: string;
+        id: string;
+        deny: number;
+        deny_numer: string;
+        allow: number;
+        allow_new: string;
+    }
+
+    interface VoiceChannel{
+        version: number;
+        type: 2;
+        rtc_region_null: string | null;
+        rate_limit_per_user: number;
+        position: number;
+        permissions: Permission[];
+        parent: Channel;
+        nsfw: boolean;
+        name: string;
+        id: string;
+        flags: number;
+        bitrate: number;
+    }
+
     interface Channel{
         version: string;
         type: number;
         position: number;
-        permissions: number | undefined;
+        permissions: Permission[];
         referenced_message: MessageReference | null;
-        parentID : string;
+        parent: Channel | string;
         nsfw: boolean;
         name: string;
         id: string;
@@ -85,6 +119,19 @@ declare namespace Disc4js{
         target: string;
         changes: any[];
         guild: Guild;
+    }
+
+    interface VoiceState{
+        member: Member;
+        session: string;
+        supress: boolean;
+        self_video: boolean;
+        self_mute: boolean;
+        self_deaf: boolean;
+        mute: boolean;
+        guild: Guild;
+        deaf: boolean;
+        channel: Channel;
     }
 
     interface EventListeners {
@@ -103,7 +150,9 @@ declare namespace Disc4js{
         presenceUpdate: [user: User]
 
         typingStart: [channel: Channel | ChannelDM, user: User]
-        channelCreate: [channel: Channel | ChannelDM]
+        channelCreate: [channel: Channel | ChannelDM | VoiceChannel]
+
+        voiceStateUpdate: [voiceState: VoiceState]
     }
 
     interface PresenceGame{
@@ -167,6 +216,7 @@ declare namespace Disc4js{
         referenced_message: MessageReference | null;
         content: string;
         user: User;
+        reactions: Reaction[];
         channel: ChannelDM;
         id: string;
 
@@ -217,6 +267,8 @@ declare namespace Disc4js{
         guilds: Guild[];
         users: User[];
         dmchannels: ChannelDM[];
+
+        fetchUser(id: string): Promise<User>;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;
 

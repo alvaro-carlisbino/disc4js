@@ -2,6 +2,7 @@ const Emoji = require("./Emoji.js")
 const Role = require("./Role.js")
 const Member = require("./Member.js")
 const Channel = require("./Channel.js")
+const VoiceChannel = require("./VoiceChannel.js")
 module.exports = class Guild{
     constructor(d, client) {
         this.id = d.id;
@@ -35,9 +36,15 @@ module.exports = class Guild{
         }
 
         for(const channel of d.channels){
-            const c = new Channel(channel, client, this)
-            client.channels.push(c)
-            this.channels.push(c)
+            if(channel.type != 2) {
+                const c = new Channel(channel, client, this)
+                client.channels.push(c)
+                this.channels.push(c)
+            }else {
+                const c = new VoiceChannel(channel, client, this)
+                client.channels.push(c)
+                this.channels.push(c)
+            }
         }
 
         for(const member of d.members){
