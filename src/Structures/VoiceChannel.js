@@ -28,4 +28,15 @@ module.exports = class VoiceChannel{
             }
         }))
     }
+
+    async delete(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest(`DELETE`, `channels/${this.id}`)
+            if(response.status == 204){
+                return resolve(true)
+            }else{
+                return resolve(response);
+            }
+        })
+    }
 }

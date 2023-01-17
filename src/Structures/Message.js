@@ -1,4 +1,4 @@
-const User = require("./UserClass.js")
+const User = require("./User.js")
 const Member = require("./Member.js")
 module.exports = class Message{
     constructor(d, client) {
@@ -50,6 +50,18 @@ module.exports = class Message{
             const response = await this._client.fetch.makeRequest("PATCH", `channels/${this.channel.id}/messages/${this.id}`, content);
             if(response.content){
                 return resolve(new Message(response, this._client))
+            }else {
+                throw new Error(response)
+            }
+        })
+    }
+
+    async delete(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("DELETE", `channels/${this.channel.id}/messages/${this.id}`);
+            if(response.status == 204){
+                this.channel.messages.slice(this.channel.messages.indexOf(this), 1)
+                return resolve(true)
             }else {
                 throw new Error(response)
             }

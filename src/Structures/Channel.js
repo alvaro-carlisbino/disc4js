@@ -11,7 +11,11 @@ module.exports = class Channel {
         this.id = d.id;
         this.lastMessage = d.last_message_id;
         this._client = client;
-        this._guild = guild;
+        if(d.guild_id) {
+            this._guild = client.guilds.find((g) => g.id == d.guild_id);
+        }else if(guild){
+            this._guild = guild;
+        }
         this.messages = []
     }
 
@@ -22,6 +26,17 @@ module.exports = class Channel {
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest("POST", `channels/${this.id}/messages`, content);
             resolve(new Message(response, this._client));
+        })
+    }
+
+    async delete(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest(`DELETE`, `channels/${this.id}`)
+            if(response.status == 204){
+                return resolve(true)
+            }else{
+                return resolve(response);
+            }
         })
     }
 }

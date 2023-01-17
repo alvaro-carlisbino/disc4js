@@ -58,6 +58,8 @@ declare namespace Disc4js{
         id: string;
         reactions: Reaction[];
 
+        delete(): Promise<boolean>;
+
         pin(): Promise<boolean>;
         unPin(): Promise<boolean>;
 
@@ -98,6 +100,7 @@ declare namespace Disc4js{
         bitrate: number;
 
         join(mute: boolean, deaf: boolean): Promise<void>;
+        delete(): Promise<boolean>;
     }
 
     interface Channel{
@@ -114,6 +117,7 @@ declare namespace Disc4js{
         messages: Message[]
 
         sendMessage(content: ContentMessage): Promise<Message>;
+        delete(): Promise<boolean>;
     }
 
     interface LogEntry{
@@ -153,6 +157,7 @@ declare namespace Disc4js{
 
         typingStart: [channel: Channel | ChannelDM, user: User]
         channelCreate: [channel: Channel | ChannelDM | VoiceChannel]
+        channelDelete: [channel: Channel | ChannelDM | VoiceChannel]
 
         voiceStateUpdate: [voiceState: VoiceState]
     }
@@ -223,6 +228,8 @@ declare namespace Disc4js{
         channel: ChannelDM;
         id: string;
 
+        delete(): Promise<boolean>;
+
         pin(): Promise<boolean>;
         unPin(): Promise<boolean>;
         edit(content: ContentMessage): Promise<Message>;
@@ -234,6 +241,8 @@ declare namespace Disc4js{
         name: string;
         id: string;
         messages: MessageDM[]
+
+        delete(): Promise<boolean>;
 
         sendMessage(content: ContentMessage): Promise<MessageDM>;
     }
@@ -272,6 +281,8 @@ declare namespace Disc4js{
         dmchannels: ChannelDM[];
 
         fetchUser(id: string): Promise<User>;
+        fetchChannel(id: string): Promise<Channel>;
+        fetchGuild(id: string): Promise<Guild>;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;
 
