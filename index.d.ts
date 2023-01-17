@@ -80,6 +80,7 @@ declare namespace Disc4js{
         type: number;
         position: number;
         permissions: number | undefined;
+        referenced_message: MessageReference | null;
         parentID : string;
         nsfw: boolean;
         name: string;
@@ -112,7 +113,8 @@ declare namespace Disc4js{
         guildDelete: [guild: Guild]
         presenceUpdate: [user: User]
 
-        typingStart: [guild: Guild, channel: Channel, member: Member]
+        typingStart: [channel: Channel | ChannelDM, user: User]
+        channelCreate: [channel: Channel | ChannelDM]
     }
 
     interface PresenceGame{
@@ -167,6 +169,29 @@ declare namespace Disc4js{
         delete_message_seconds: number;
     }
 
+    interface MessageDM{
+        type: number;
+        tts: boolean;
+        pinned: boolean;
+        nonce: string;
+        mentions: any[];
+        referenced_message: MessageReference | null;
+        content: string;
+        user: User;
+        channel: ChannelDM;
+        id: string;
+    }
+
+    interface ChannelDM{
+        version: string;
+        type: number;
+        name: string;
+        id: string;
+        messages: MessageDM[]
+
+        sendMessage(content: ContentMessage): Promise<PartialMessage>;
+    }
+
     interface Guild{
         id: string;
         name: string;
@@ -198,6 +223,7 @@ declare namespace Disc4js{
         channels: Channel[];
         guilds: Guild[];
         users: User[];
+        dmchannels: ChannelDM[];
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;
 

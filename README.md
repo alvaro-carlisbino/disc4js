@@ -11,7 +11,7 @@ Example ping command:
 const {Client} = require("disc4js")
 
 const client = new Client("TOKEN", {
-    intents: 514
+    intents: 3276799
 })
 
 client.once("ready", () => {

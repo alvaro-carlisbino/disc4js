@@ -11,6 +11,7 @@ module.exports = class Client extends EventEmitter{
         this.guilds = [];
         this.channels = [];
         this.users = [];
+        this.dmchannels = []
     }
 
     setUser(user){

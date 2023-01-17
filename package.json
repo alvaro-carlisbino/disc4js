@@ -1,6 +1,6 @@
 {
   "name": "disc4js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Bryzzen",
   "main": "./index.js",
   "license": "MIT",
@@ -11,5 +11,9 @@
     "@types/node": "^18.11.18"
   },
   "typings": "./index.d.ts",
-  "description": "A NodeJS Discord API WebSocket libary"
+  "description": "A NodeJS Discord API WebSocket libary",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryzzen-kibador/disc4js"
+  }
 }
