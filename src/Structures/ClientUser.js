@@ -9,5 +9,6 @@ module.exports = class ClientUser{
         this.tag = this.username + "#" + this.discriminator;
         this.bot = d.bot;
         this.avatar = d.avatar;
+        this.bio = d.bio;
     }
 }

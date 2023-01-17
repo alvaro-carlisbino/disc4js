@@ -18,6 +18,7 @@ declare namespace Disc4js{
         tag: string;
         bot: boolean;
         avatar: string;
+        bio?: string;
     }
 
     interface Role{
@@ -47,6 +48,8 @@ declare namespace Disc4js{
     }
 
     interface Message {
+        attachments: [];
+        component: Component[];
         type: number;
         tts: boolean;
         pinned: boolean;
@@ -71,9 +74,83 @@ declare namespace Disc4js{
         channel_id: string;
     }
 
+    interface EmbedFooter{
+        name: string;
+        url?: string;
+        icon_url?: string;
+        proxy_icon_url?: string;
+    }
+
+    interface EmbedImage{
+        url: string;
+        height?: number;
+        width?: number;
+        proxy_url?: string;
+    }
+
+    interface EmbedThumbnail{
+        url: string;
+        height?: number;
+        width?: number;
+        proxy_url?: string;
+    }
+
+    interface EmbedVideo{
+        url: string;
+        height?: number;
+        width?: number;
+        proxy_url?: string;
+    }
+
+    interface EmbedProvider{
+        name?: string;
+        url?: string;
+    }
+
+    interface EmbedAuthor{
+        name: string;
+        url?: string;
+        icon_url?: string;
+        proxy_icon_url?: string;
+    }
+
+    interface EmbedField{
+        name: string;
+        value: string;
+        inline?: boolean;
+    }
+
+    interface Embed {
+        title?: string;
+        description?: string;
+        url?: string;
+        timestamp?: number;
+        color?: number;
+        footer?: EmbedFooter;
+        image?: EmbedImage;
+        thumbnail?: EmbedThumbnail;
+        video?: EmbedVideo;
+        provider?: EmbedProvider;
+        author?: EmbedAuthor;
+        fields: EmbedField[];
+    }
+
+    interface Component{
+        type: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+        style?: 1 | 2 | 3 | 4 | 5;
+        label?: string;
+        emoji?: Emoji;
+        custom_id?: string;
+        url?: string;
+        disabled?: boolean
+        components?: Component[];
+    }
+
     interface ContentMessage{
         content?: string;
         message_reference?: MessageReference;
+        embeds?: Embed[];
+        components: Component[];
     }
 
     interface Permission{
@@ -140,6 +217,21 @@ declare namespace Disc4js{
         channel: Channel;
     }
 
+    interface Interaction{
+        version: number;
+        type: number;
+        token: string;
+        member?: Member;
+        user: User;
+        guild?: Guild;
+        channel: Channel | ChannelDM;
+        id: string;
+        data: object;
+        application_id: string;
+
+        reply(content: ContentMessage): Promise<Message>;
+    }
+
     interface EventListeners {
         message: [message: Message];
         ready: []
@@ -160,6 +252,10 @@ declare namespace Disc4js{
         channelDelete: [channel: Channel | ChannelDM | VoiceChannel]
 
         voiceStateUpdate: [voiceState: VoiceState]
+
+        clientUserUpdate: [user: ClientUser]
+        interactionCreate: [interaction: Interaction]
+        inviteCreate: [invite: Invite]
     }
 
     interface PresenceGame{
@@ -226,6 +322,9 @@ declare namespace Disc4js{
         user: User;
         reactions: Reaction[];
         channel: ChannelDM;
+
+        attachments: [];
+        component: Component[];
         id: string;
 
         delete(): Promise<boolean>;
@@ -247,6 +346,19 @@ declare namespace Disc4js{
         sendMessage(content: ContentMessage): Promise<MessageDM>;
     }
 
+    interface Invite{
+        uses: number;
+        type: number;
+        max_uses: number;
+        max_age: number;
+        inviter: User;
+        guild: Guild;
+        code: string;
+        channel: Channel;
+        expires_at: string;
+        created_at: string;
+    }
+
     interface Guild{
         id: string;
         name: string;
@@ -255,6 +367,7 @@ declare namespace Disc4js{
         splash: string;
         owner_id: string;
         region: 'deprecated';
+        invites: Invite[];
         systemChannelId: string | undefined;
         owner: Member;
         max_members: number;
@@ -272,6 +385,10 @@ declare namespace Disc4js{
         banMember(id: string, options: BanOptions): Promise<boolean>;
     }
 
+    interface ClientUserOptions{
+        username: string;
+    }
+
     export class Client extends EventEmitter {
         user: ClientUser;
         emojis: Emoji[];
@@ -279,6 +396,7 @@ declare namespace Disc4js{
         guilds: Guild[];
         users: User[];
         dmchannels: ChannelDM[];
+        modifyUser(options: ClientUserOptions): Promise<boolean>;
 
         fetchUser(id: string): Promise<User>;
         fetchChannel(id: string): Promise<Channel>;

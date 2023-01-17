@@ -54,7 +54,7 @@ module.exports = class Guild{
             }
             this.members.push(m)
         }
-
+        this.invites = [];
         this._client = client;
     }
 

@@ -69,4 +69,13 @@ module.exports = class Client extends EventEmitter{
             return resolve(response)
         })
     }
+
+    async modifyUser(options){
+        if(!options || typeof options !== "object" || !options.username) throw new Error(`Options need username or avatar`)
+
+        return new Promise(async (resolve, reject) => {
+            const response = await this.fetch.makeRequest(`PATCH`, `users/@me`, options)
+            return resolve(response)
+        })
+    }
 }

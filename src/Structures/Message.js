@@ -17,6 +17,8 @@ module.exports = class Message{
         this.id = d.id;
         this._client = client;
         this.reactions = [];
+        this.components = d.components || [];
+        this.attachments = d.attachments || [];
         this.member = this.guild.members.find((m) => m.user.id == d.author.id)
     }
 
