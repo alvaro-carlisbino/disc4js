@@ -49,7 +49,7 @@ module.exports = class Guild{
 
         for(const member of d.members){
             const m = new Member(member, client)
-            if(m.user.id == this.owner_id){
+            if(m.user && m.user.id == this.owner_id){
                 this.owner = m;
             }
             this.members.push(m)

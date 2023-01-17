@@ -191,7 +191,6 @@ declare namespace Disc4js{
         publicFlags: number;
         id: string;
         presence?: Presence;
-
         createDM(): Promise<ChannelDM>;
     }
 

@@ -1,4 +1,4 @@
-const ChannelDM = require("../Structures/ChannelDM.js")
+const ChannelDM = require("./ChannelDM.js")
 
 module.exports = class User {
     constructor(d, client) {
@@ -15,6 +15,7 @@ module.exports = class User {
     setPresence(presence){
         this.presence = presence;
     }
+
 
     async createDM(){
         return new Promise(async (resolve, reject) => {
