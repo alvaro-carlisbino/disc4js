@@ -309,7 +309,7 @@ declare namespace Disc4js{
     export class Member{
         nick: string;
         avatar: string | undefined;
-        roles: string[];
+        roles: Role[];
         user: User;
         joined_at: string;
         deaf: boolean;

@@ -4,11 +4,11 @@ module.exports = class Member{
     constructor(d, client, guild) {
         this.nick = d.nick || null;
         this.avatar = d.avatar;
-        this.roles = d.roles;
-        /*for(const role of d.roles)
+        this.roles = []
+        for(const role of d.roles)
         {
-            this.roles.push(new Role(role));
-        }*/
+            this.roles.push(guild.roles.find((r) => r.id == role));
+        }
         this.user = new User(d.user, client) || null
         client.users.push(this.user)
         this.joined_at = d.joined_at;
