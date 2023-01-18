@@ -48,7 +48,7 @@ module.exports = class Guild{
         }
 
         for(const member of d.members){
-            const m = new Member(member, client)
+            const m = new Member(member, client, this)
             if(m.user && m.user.id == this.owner_id){
                 this.owner = m;
             }
@@ -93,4 +93,27 @@ module.exports = class Guild{
             }
         })
     }
+
+    async leave(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("DELETE", `users/@me/guilds/${this.id}`)
+            if(response.status == 204){
+                return resolve(true)
+            }else{
+                return resolve(response)
+            }
+        })
+    }
+
+    async createRole(roleOptions){
+        if(!roleOptions || typeof roleOptions !== "object") throw new Error("Invalid role options");
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("POST", `guilds/${this.id}/roles`, roleOptions)
+            if(response){
+                const role = new Role(response, this._client)
+                resolve(role)
+            }
+        })
+    }
+
 }

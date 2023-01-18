@@ -244,6 +244,7 @@ declare namespace Disc4js{
         guildMemberRemove: [member: Member]
         guildMemberUpdate: [oldMember: Member, newMember: Member]
         guildDelete: [guild: Guild]
+        guildCreate: [guild: Guild]
         presenceUpdate: [user: User]
 
         typingStart: [channel: Channel | ChannelDM, user: User]
@@ -255,6 +256,9 @@ declare namespace Disc4js{
         clientUserUpdate: [user: ClientUser]
         interactionCreate: [interaction: Interaction]
         inviteCreate: [invite: Invite]
+        inviteDelete: [invite: Invite]
+        guildRoleCreate: [role: Role];
+        guildRoleDelete: [role: Role];
     }
 
     interface PresenceGame{
@@ -294,15 +298,24 @@ declare namespace Disc4js{
         createDM(): Promise<ChannelDM>;
     }
 
+    interface modifyMemberOptions{
+        nick?: string;
+        roles?: string[];
+        mute?: boolean;
+        deaf?: boolean;
+        channel_id?: string;
+    }
+
     export class Member{
         nick: string;
         avatar: string | undefined;
-        roles: Role[];
+        roles: string[];
         user: User;
         joined_at: string;
         deaf: boolean;
         mute: boolean;
         permissions: number | undefined;
+        modifyMember(modifyMemberOptions): Promise<boolean>;
     }
 
     interface BanOptions{
@@ -346,16 +359,26 @@ declare namespace Disc4js{
     }
 
     export class Invite{
-        uses: number;
+        uses?: number;
         type: number;
-        max_uses: number;
-        max_age: number;
+        max_uses?: number;
+        max_age?: number;
         inviter: User;
         guild: Guild;
         code: string;
         channel: Channel;
         expires_at: string;
-        created_at: string;
+        created_at?: string;
+    }
+
+    interface roleOptions{
+        name?: string;
+        permissions?: string;
+        color?: number;
+        hoist?: boolean;
+        icon?: any;
+        unicode_emoji?: string;
+        mentionable?: boolean;
     }
 
     export class Guild{
@@ -382,6 +405,9 @@ declare namespace Disc4js{
         channels: Channel[];
 
         banMember(id: string, options: BanOptions): Promise<boolean>;
+        removeBan(id: string): Promise<boolean>;
+        leave(): Promise<boolean>;
+        createRole(roleOptions): Promise<Role | void>;
     }
 
     interface ClientUserOptions{
@@ -400,6 +426,7 @@ declare namespace Disc4js{
         fetchUser(id: string): Promise<User>;
         fetchChannel(id: string): Promise<Channel>;
         fetchGuild(id: string): Promise<Guild>;
+        getInvite(code: string): Promise<Invite>;
         emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;

@@ -5,6 +5,7 @@ const RequestHandler = require("../Util/RequestHandler.js")
 const User = require("../Structures/UserClass.js")
 const Guild = require("../Structures/Guild.js")
 const Channel = require("../Structures/Channel");
+const Invite = require("../Structures/Invite.js")
 module.exports = class Client extends EventEmitter{
     constructor(token, options){
         super({})
@@ -76,6 +77,22 @@ module.exports = class Client extends EventEmitter{
         return new Promise(async (resolve, reject) => {
             const response = await this.fetch.makeRequest(`PATCH`, `users/@me`, options)
             return resolve(response)
+        })
+    }
+
+    async getInvite(code){
+        if(!code || typeof code != "string") throw new Error(`Specify a valid code`)
+        return new Promise(async (resolve, reject) => {
+            const response = await this.fetch.makeRequest(`GET`, `invites/${code}`)
+            return resolve(new Invite(response, this) || response)
+        })
+    }
+
+    async deleteInvite(code){
+        if(!code || typeof code != "string") throw new Error(`Specify a valid code`)
+        return new Promise(async (resolve, reject) => {
+            const response = await this.fetch.makeRequest(`DELETE`, `invites/${code}`)
+            return resolve(new Invite(response, this) || response)
         })
     }
 }
