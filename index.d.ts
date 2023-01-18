@@ -1,6 +1,6 @@
 import {EventEmitter} from "events";
 
-declare function Discjs(token: string, options: Discjs.Options): Discjs.Client;
+declare function Disc4js(token: string, options: Discjs.Options): Discjs.Client;
 
 declare namespace Discjs{
     interface Options{
@@ -408,4 +408,4 @@ declare namespace Discjs{
     }
 }
 
-export = Discjs;
+export = Disc4js;
