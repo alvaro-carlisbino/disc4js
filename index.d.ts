@@ -1,4 +1,4 @@
-import EventEmitter from "events";
+import {EventEmitter} from "events";
 
 declare function Disc4js(token: string, options: Disc4js.Options): Disc4js.Client;
 
@@ -401,12 +401,10 @@ declare namespace Disc4js{
         fetchChannel(id: string): Promise<Channel>;
         fetchGuild(id: string): Promise<Guild>;
         emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
-        emit(event: string, ...args: any[]): boolean;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
-        on(event: string, listener: (...args: any[]) => void): this;
+
 
         once<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
-        once(event: string, listener: (...args: any[]) => void): this;
     }
 }
 
