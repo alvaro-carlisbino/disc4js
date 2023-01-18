@@ -8,7 +8,7 @@ It's a simple discord library, if u need help or support, send message to me: ``
 Example ping command:
 
 ````js
-const Client = require("disc4js")
+const {Client} = require("disc4js")
 
 const client = new Client("TOKEN", {
     intents: 3276799
