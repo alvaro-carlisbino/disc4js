@@ -1,4 +1,3 @@
-// @ts-ignore
 import EventEmitter from "events";
 
 declare function Disc4js(token: string, options: Disc4js.Options): Disc4js.Client;
@@ -21,7 +20,7 @@ declare namespace Disc4js{
         bio?: string;
     }
 
-    interface Role{
+    export class Role{
         id: string;
         name: string;
         position: number;
@@ -31,14 +30,14 @@ declare namespace Disc4js{
         icon: string | null;
     }
 
-    interface Emoji {
+    export class Emoji {
         name: string;
         id: string;
         animated: boolean;
         available: boolean | undefined;
     }
 
-    interface Reaction{
+    export class Reaction{
         emoji: Emoji | {name: string, id: null}
         channel: Channel;
         message: Message | MessageDM;
@@ -47,7 +46,7 @@ declare namespace Disc4js{
         user: User
     }
 
-    interface Message {
+    export class Message {
         attachments: [];
         component: Component[];
         type: number;
@@ -162,7 +161,7 @@ declare namespace Disc4js{
         allow_new: string;
     }
 
-    interface VoiceChannel{
+    export class VoiceChannel{
         version: number;
         type: 2;
         rtc_region_null: string | null;
@@ -180,7 +179,7 @@ declare namespace Disc4js{
         delete(): Promise<boolean>;
     }
 
-    interface Channel{
+    export class Channel{
         version: string;
         type: number;
         position: number;
@@ -197,14 +196,14 @@ declare namespace Disc4js{
         delete(): Promise<boolean>;
     }
 
-    interface LogEntry{
+    export class LogEntry{
         user: User;
         target: string;
         changes: any[];
         guild: Guild;
     }
 
-    interface VoiceState{
+    export class VoiceState{
         member: Member;
         session: string;
         supress: boolean;
@@ -217,7 +216,7 @@ declare namespace Disc4js{
         channel: Channel;
     }
 
-    interface Interaction{
+    export class Interaction{
         version: number;
         type: number;
         token: string;
@@ -277,14 +276,14 @@ declare namespace Disc4js{
         created_ate: number;
     }
 
-    interface Presence{
+    export class Presence{
         status: string;
         game?: PresenceGame[]
         clientStatus: PresenceClientStatus
         activities: PresenceActivities[]
     }
 
-    interface User {
+    export class User {
         username: string;
         tag: string;
         bot: boolean;
@@ -295,7 +294,7 @@ declare namespace Disc4js{
         createDM(): Promise<ChannelDM>;
     }
 
-    interface Member{
+    export class Member{
         nick: string;
         avatar: string | undefined;
         roles: Role[];
@@ -311,7 +310,7 @@ declare namespace Disc4js{
         delete_message_seconds: number;
     }
 
-    interface MessageDM{
+    export class MessageDM{
         type: number;
         tts: boolean;
         pinned: boolean;
@@ -334,7 +333,7 @@ declare namespace Disc4js{
         edit(content: ContentMessage): Promise<Message>;
     }
 
-    interface ChannelDM{
+    export class ChannelDM{
         version: string;
         type: number;
         name: string;
@@ -346,7 +345,7 @@ declare namespace Disc4js{
         sendMessage(content: ContentMessage): Promise<MessageDM>;
     }
 
-    interface Invite{
+    export class Invite{
         uses: number;
         type: number;
         max_uses: number;
@@ -359,7 +358,7 @@ declare namespace Disc4js{
         created_at: string;
     }
 
-    interface Guild{
+    export class Guild{
         id: string;
         name: string;
         icon: string;

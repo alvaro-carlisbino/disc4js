@@ -1,3 +1,5 @@
+"use strict";
+
 const Client = require("./src/Client/Client")
 
 function Disc4js(token, options){
