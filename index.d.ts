@@ -1,8 +1,8 @@
 import {EventEmitter} from "events";
 
-declare function Disc4js(token: string, options: Disc4js.Options): Disc4js.Client;
+declare function Discjs(token: string, options: Discjs.Options): Discjs.Client;
 
-declare namespace Disc4js{
+declare namespace Discjs{
     interface Options{
         intents: number
     }
@@ -408,4 +408,4 @@ declare namespace Disc4js{
     }
 }
 
-export = Disc4js;
+export = Discjs;
