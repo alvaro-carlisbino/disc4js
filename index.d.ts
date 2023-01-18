@@ -233,7 +233,7 @@ declare namespace Disc4js{
 
     interface EventListeners {
         message: [message: Message];
-        ready: []
+        ready: [];
 
         messageUpdate: [oldMessage: Message, newMessage: Message]
         channelUpdate: [oldChannel: Channel, newChannel: Channel]
@@ -400,6 +400,8 @@ declare namespace Disc4js{
         fetchUser(id: string): Promise<User>;
         fetchChannel(id: string): Promise<Channel>;
         fetchGuild(id: string): Promise<Guild>;
+        emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
+        emit(event: string, ...args: any[]): boolean;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
         on(event: string, listener: (...args: any[]) => void): this;
 
