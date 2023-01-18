@@ -402,7 +402,7 @@ declare namespace Disc4js{
         fetchGuild(id: string): Promise<Guild>;
         emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
         on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
-
+        on(event: string, listener: (...args: any[]) => void): this;
 
         once<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
     }
