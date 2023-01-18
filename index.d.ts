@@ -407,3 +407,5 @@ declare namespace Disc4js{
         once(event: string, listener: (...args: any[]) => void): this;
     }
 }
+
+export = Disc4js;
