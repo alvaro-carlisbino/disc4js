@@ -1,5 +1,5 @@
 const ChannelDM = require("../Structures/ChannelDM.js")
-const Channel = require("../Structures/Channel.js")
+const Channel = require("../Structures/ChannelClass.js")
 const VoiceChannel = require("../Structures/VoiceChannel.js")
 module.exports = class ChannelCreate {
     constructor(d, client) {

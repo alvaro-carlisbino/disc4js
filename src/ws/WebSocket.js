@@ -50,7 +50,7 @@ module.exports = class WebSocket {
         this.lastResponse = Date.now()
         this.ping = ~~(this.lastResponse - this.lastHello)
       }else if(op == 2){
-        console.log(d)
+        //console.log(d)
       }
       //console.log(t, s, op);
       this._client.emit("raw", (t,s,op,d))

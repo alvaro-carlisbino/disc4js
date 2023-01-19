@@ -1,6 +1,6 @@
 const User = require("./User.js")
 const Member = require("./Member.js")
-const Channel = require("./Channel.js")
+const Channel = require("./ChannelClass");
 module.exports = class Message{
     constructor(d, client) {
         this.type = d.type;
@@ -76,7 +76,8 @@ module.exports = class Message{
         if(!options || typeof options !== "object") throw new Error("Invalid options")
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest("POST", `channels/${this.channel.id}/messages/${this.id}/threads`, options);
-            return resolve(new Channel(response, this._client, this.guild))
+            const channel = new Channel(response, this._client, this.guild)
+            resolve(channel | response)
         })
     }
 }

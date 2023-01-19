@@ -1,4 +1,4 @@
-const Channel = require("../Structures/Channel");
+const Channel = require("../Structures/ChannelClass");
 module.exports = class ChannelUpdate{
     constructor(d, client) {
         const oldChannel = client.channels.find((c) => c.id == d.id) || undefined;

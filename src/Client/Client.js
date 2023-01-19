@@ -4,7 +4,7 @@ const RequestHandler = require("../Util/RequestHandler.js")
 
 const User = require("../Structures/UserClass.js")
 const Guild = require("../Structures/Guild.js")
-const Channel = require("../Structures/Channel");
+const Channel = require("../Structures/ChannelClass.js");
 const Invite = require("../Structures/Invite.js")
 module.exports = class Client extends EventEmitter{
     constructor(token, options){

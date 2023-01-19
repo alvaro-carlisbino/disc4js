@@ -1,7 +1,7 @@
 const Emoji = require("./Emoji.js")
 const Role = require("./Role.js")
 const Member = require("./Member.js")
-const Channel = require("./Channel.js")
+const Channel = require("./ChannelClass.js")
 const VoiceChannel = require("./VoiceChannel.js")
 module.exports = class Guild{
     constructor(d, client) {
