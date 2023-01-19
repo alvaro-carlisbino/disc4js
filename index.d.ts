@@ -53,10 +53,6 @@ declare namespace Disc4js{
     }
 
     export class Message {
-        constructor(response: any, _client) {
-            
-        }
-
         attachments: [];
         component: Component[];
         type: number;
@@ -331,7 +327,7 @@ declare namespace Disc4js{
         createDM(): Promise<ChannelDM>;
     }
 
-    interface modifyMemberOptions{
+    interface ModifyMemberOptions{
         nick?: string;
         roles?: string[];
         mute?: boolean;
@@ -348,7 +344,7 @@ declare namespace Disc4js{
         deaf: boolean;
         mute: boolean;
         permissions: number | undefined;
-        modifyMember(modifyMemberOptions): Promise<boolean>;
+        modifyMember(options: ModifyMemberOptions): Promise<boolean>;
     }
 
     interface BanOptions{
@@ -440,7 +436,7 @@ declare namespace Disc4js{
         banMember(id: string, options: BanOptions): Promise<boolean>;
         removeBan(id: string): Promise<boolean>;
         leave(): Promise<boolean>;
-        createRole(roleOptions): Promise<Role | void>;
+        createRole(options: roleOptions): Promise<Role | void>;
     }
 
     interface ClientUserOptions{

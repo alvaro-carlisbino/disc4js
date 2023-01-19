@@ -1,9 +1,7 @@
-"use strict";
+const Client = require('./src/Client/Client.js');
 
-const Client = require("./src/Client/Client.js")
-
-function Disc4js(token, options){
-    return new Client(token, options)
+function Disc4js(token, options) {
+  return new Client(token, options);
 }
 
 Disc4js.Client = Client;

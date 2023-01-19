@@ -1,7 +1,7 @@
-const LogEntry = require("../Structures/LogEntry.js")
+const LogEntry = require("../Structures/LogEntry.js");
 
-module.exports = class GuildAuditLogEntryCreate{
-    constructor(d, client) {
-        client.emit("guildAuditLogEntryCreate", new LogEntry(d, client))
-    }
-}
+module.exports = class GuildAuditLogEntryCreate {
+  constructor(d, client) {
+    client.emit("guildAuditLogEntryCreate", new LogEntry(d, client));
+  }
+};
