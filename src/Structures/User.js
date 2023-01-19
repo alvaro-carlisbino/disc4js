@@ -4,7 +4,10 @@ module.exports = class User {
     constructor(d, client) {
         this.username = d.username || client.users.find((u) => u.id == d.id).username || "";
         this.id = d.id;
-        this.bot = d.bot ? d.bot : false;
+        this.bot = d.bot
+        if(this.id == client.user.id){
+            this.bot = true;
+        }
         this.avatar = d.avatar;
         this.discriminator = d.discriminator;
         this.tag = this.username+"#"+this.discriminator;

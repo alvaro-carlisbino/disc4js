@@ -260,7 +260,9 @@ declare namespace Disc4js{
         inviteDelete: [invite: Invite]
         guildRoleCreate: [role: Role];
         guildRoleDelete: [role: Role];
-        webhookUpdate: [guild: Guild, channel: Channel];
+        webhookUpdate: [channel: Channel| ChannelDM];
+        messageDeleteBulg: [messages: Message[]];
+        channelPinsUpdate: [channel: Channel | ChannelDM]
     }
 
     interface PresenceGame{

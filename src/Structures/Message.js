@@ -11,8 +11,7 @@ module.exports = class Message{
         this.guildID = d.guild_id;
         this.guild = client.guilds.find((g) => g.id == this.guildID) || client.channels.find((c) => c.id == d.channel_id)._guild || client.guilds.find((g) => g.id == d.message_reference.guild_id)
         this.content = d.content;
-        //console.log(d)
-        this.user = client.users.find((u) => u.id == d.author ? d.author.id : "0") || new User(d.author, client)
+        this.user = client.users.find((u) => u.id == d.author.id) || new User(d.author, client)
         this.channel = client.channels.find((c) => c.id == d.channel_id)
         this.id = d.id;
         this._client = client;
@@ -67,6 +66,13 @@ module.exports = class Message{
             }else {
                 throw new Error(response)
             }
+        })
+    }
+
+    async startThread(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("POST", `channels/${this.channel.id}/messages/${this.id}/threads`);
+            return resolve(new Channel(response, client, this.guild))
         })
     }
 }

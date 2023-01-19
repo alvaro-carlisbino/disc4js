@@ -7,7 +7,7 @@ module.exports = class ClientUser{
         this.email = d.email;
         this.discriminator = d.discriminator;
         this.tag = this.username + "#" + this.discriminator;
-        this.bot = d.bot;
+        this.bot = true;
         this.avatar = d.avatar;
         this.bio = d.bio;
     }

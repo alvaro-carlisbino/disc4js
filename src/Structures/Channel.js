@@ -44,10 +44,14 @@ module.exports = class Channel {
         if(!number || typeof number !== "number") throw new Error("Invalid number")
         if(number < 2) throw new Error("Delete more than 2 mensages")
         return new Promise(async (resolve, reject) => {
-            const response = await this._client.fetch.makeRequest(`DELETE`, `channels/${this.id}/messages/bulk-delete`, {
-                messages: this.messages.slice(0, number)
+            const response = await this._client.fetch.makeRequest(`POST`, `channels/${this.id}/messages/bulk-delete`, {
+                messages: this.messages.slice(0, number).map((m) => m.id)
             })
-            return resolve(true)
+            if(response.status == 204){
+                return resolve(true)
+            }else {
+                return resolve(response);
+            }
         })
     }
 }
