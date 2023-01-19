@@ -39,4 +39,15 @@ module.exports = class Channel {
             }
         })
     }
+
+    async bulkDelete(number){
+        if(!number || typeof number !== "number") throw new Error("Invalid number")
+        if(number < 2) throw new Error("Delete more than 2 mensages")
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest(`DELETE`, `channels/${this.id}/messages/bulk-delete`, {
+                messages: this.messages.slice(0, number)
+            })
+            return resolve(true)
+        })
+    }
 }

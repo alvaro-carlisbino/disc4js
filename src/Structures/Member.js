@@ -26,11 +26,7 @@ module.exports = class Member{
         if(!modifyMember || typeof modifyMember !== "object") throw new Error("A modifyMember object is invalid")
         return new Promise(async (resolve, reject) => {
             const response = await this._client.fetch.makeRequest(`PATCH`, `guilds/${this._guild.id}/members/${this.user.id}`, modifyMember)
-            if(response.status == 200){
-                resolve(true);
-            }else{
-                resolve(response)
-            }
+            return resolve(true);
         })
     }
 

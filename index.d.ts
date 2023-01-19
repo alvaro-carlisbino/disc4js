@@ -194,6 +194,7 @@ declare namespace Disc4js{
 
         sendMessage(content: ContentMessage): Promise<Message>;
         delete(): Promise<boolean>;
+        bulkDelete(number: number): Promise<boolean>;
     }
 
     export class LogEntry{
@@ -259,6 +260,7 @@ declare namespace Disc4js{
         inviteDelete: [invite: Invite]
         guildRoleCreate: [role: Role];
         guildRoleDelete: [role: Role];
+        webhookUpdate: [guild: Guild, channel: Channel];
     }
 
     interface PresenceGame{
