@@ -1,4 +1,4 @@
-const Message = require("../Structures/Message.js")
+const Message = require("../Structures/MessageClass.js")
 
 module.exports = class MessageUpdate {
     constructor(d, client) {

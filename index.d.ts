@@ -46,7 +46,17 @@ declare namespace Disc4js{
         user: User
     }
 
+    interface ThreadOptions{
+        name: string
+        auto_archive_duration?: number;
+        rate_limit_per_user?: number;
+    }
+
     export class Message {
+        constructor(response: any, _client) {
+            
+        }
+
         attachments: [];
         component: Component[];
         type: number;
@@ -66,6 +76,7 @@ declare namespace Disc4js{
         unPin(): Promise<boolean>;
 
         edit(content: ContentMessage): Promise<Message>;
+        startThread(options: ThreadOptions): Promise<Channel>;
     }
 
     interface MessageReference{
@@ -179,6 +190,21 @@ declare namespace Disc4js{
         delete(): Promise<boolean>;
     }
 
+    interface InviteCreateProperties{
+        max_age: number;
+        max_uses: number;
+        temporary: boolean;
+        unique: boolean;
+        target_type: number;
+        target_user_id: string;
+        target_application_id: string;
+    }
+
+    interface ThreadOptionsChannel extends ThreadOptions{
+        type?: number;
+        invitable?: boolean;
+    }
+
     export class Channel{
         version: string;
         type: number;
@@ -195,6 +221,9 @@ declare namespace Disc4js{
         sendMessage(content: ContentMessage): Promise<Message>;
         delete(): Promise<boolean>;
         bulkDelete(number: number): Promise<boolean>;
+        createInvite(invite: InviteCreateProperties): Promise<Invite>;
+        startTyping(): Promise<boolean>;
+        startThread(options: ThreadOptionsChannel): Promise<Channel>;
     }
 
     export class LogEntry{

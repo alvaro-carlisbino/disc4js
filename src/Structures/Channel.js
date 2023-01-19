@@ -1,4 +1,5 @@
-const Message = require("./Message.js")
+const {Invite} = require("../../index");
+const Message = require("./MessageClass")
 module.exports = class Channel {
     constructor(d, client, guild) {
         this.version = d.version;
@@ -54,4 +55,32 @@ module.exports = class Channel {
             }
         })
     }
+
+    async createInvite(invite){
+        if(!invite || typeof invite !== "object") throw new Error(`Invalid invite`)
+        return new Promies(async(resolve,reject) => {
+            const response = await this._client.fetch.makeRequest("POST", `channels/${this.id}/invites`, invite)
+            return resolve(new Invite(response) || response)
+        })
+    }
+
+    async startTyping(){
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest(`POST`, `channels/${this.id}/typing`)
+            if(response.status){
+                return resolve(true)
+            }else {
+                return resolve(response)
+            }
+        })
+    }
+
+    async startThread(options){
+        if(!options || typeof options !== "object") throw new Error("Invalid options")
+        return new Promise(async (resolve, reject) => {
+            const response = await this._client.fetch.makeRequest("POST", `channels/${this.channel.id}/messages/${this.id}/threads`, options);
+            return resolve(new Channel(response, this._client, this.guild))
+        })
+    }
+
 }

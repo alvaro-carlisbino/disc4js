@@ -1,4 +1,4 @@
-const Message = require("./Message.js")
+const Message = require("./MessageDM.js")
 module.exports = class ChannelDM {
     constructor(d, client) {
         this.version = d.version;
