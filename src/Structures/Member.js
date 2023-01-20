@@ -1,5 +1,5 @@
-const Role = require('./Role.js');
-const User = require('./User.js');
+const Role = require("./Role.js");
+const User = require("./User.js");
 
 module.exports = class Member {
   constructor(d, client, guild) {
@@ -23,9 +23,14 @@ module.exports = class Member {
   }
 
   async modifyMember(modifyMember) {
-    if (!modifyMember || typeof modifyMember !== 'object') throw new Error('A modifyMember object is invalid');
+    if (!modifyMember || typeof modifyMember !== "object")
+      throw new Error("A modifyMember object is invalid");
     return new Promise(async (resolve, reject) => {
-      const response = await this._client.fetch.makeRequest('PATCH', `guilds/${this._guild.id}/members/${this.user.id}`, modifyMember);
+      const response = await this._client.fetch.makeRequest(
+        "PATCH",
+        `guilds/${this._guild.id}/members/${this.user.id}`,
+        modifyMember
+      );
       return resolve(true);
     });
   }

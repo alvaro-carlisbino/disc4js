@@ -1,4 +1,4 @@
-const User = require('./UserClass');
+const User = require("./UserClass");
 
 module.exports = class MessageDM {
   constructor(d, client) {
@@ -11,7 +11,9 @@ module.exports = class MessageDM {
     // this.guildID = d.guild_id;
     // this.guild = client.guilds.find((g) => g.id == this.guildID) || client.guilds.find((g) => g.id == d.message_reference.guild_id)
     this.content = d.content;
-    this.user = client.users.find((u) => u.id == d.author.id) || new User(d.author, client);
+    this.user =
+      client.users.find((u) => u.id == d.author.id) ||
+      new User(d.author, client);
     this.channel = client.dmchannels.find((c) => c.id == d.channel_id);
     this.id = d.id;
     this._client = client;
@@ -20,7 +22,10 @@ module.exports = class MessageDM {
 
   async pin() {
     return new Promise(async (resolve, reject) => {
-      const response = await this._client.fetch.makeRequest('PUT', `channels/${this.channel.id}/pins/${this.id}`);
+      const response = await this._client.fetch.makeRequest(
+        "PUT",
+        `channels/${this.channel.id}/pins/${this.id}`
+      );
       if (response.status == 204) {
         return resolve(true);
       }
@@ -30,7 +35,10 @@ module.exports = class MessageDM {
 
   async unPin() {
     return new Promise(async (resolve, reject) => {
-      const response = await this._client.fetch.makeRequest('DELETE', `channels/${this.channel.id}/pins/${this.id}`);
+      const response = await this._client.fetch.makeRequest(
+        "DELETE",
+        `channels/${this.channel.id}/pins/${this.id}`
+      );
       if (response.status == 204) {
         return resolve(true);
       }
@@ -39,11 +47,15 @@ module.exports = class MessageDM {
   }
 
   async edit(content) {
-    if (!content || typeof content !== 'object') {
-      throw new Error('Invalid content. Content must be a valid object.');
+    if (!content || typeof content !== "object") {
+      throw new Error("Invalid content. Content must be a valid object.");
     }
     return new Promise(async (resolve, reject) => {
-      const response = await this._client.fetch.makeRequest('PATCH', `channels/${this.channel.id}/messages/${this.id}`, content);
+      const response = await this._client.fetch.makeRequest(
+        "PATCH",
+        `channels/${this.channel.id}/messages/${this.id}`,
+        content
+      );
       if (response.content) {
         return resolve(new Message(response, this._client));
       }
@@ -53,7 +65,10 @@ module.exports = class MessageDM {
 
   async delete() {
     return new Promise(async (resolve, reject) => {
-      const response = await this._client.fetch.makeRequest('DELETE', `channels/${this.channel.id}/messages/${this.id}`);
+      const response = await this._client.fetch.makeRequest(
+        "DELETE",
+        `channels/${this.channel.id}/messages/${this.id}`
+      );
       if (response.status == 204) {
         this.channel.messages.slice(this.channel.messages.indexOf(this), 1);
         return resolve(true);

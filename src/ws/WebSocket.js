@@ -55,7 +55,7 @@ module.exports = class WebSocket {
         // console.log(d)
       }
       // console.log(t, s, op);
-      this._client.emit("raw", (t, s, op, d));
+      this._client.emit("raw", json);
       if (t) {
         new (require(`../Events/${t.toLowerCase()}.js`))(d, this._client);
       }
