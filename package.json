@@ -1,6 +1,6 @@
 {
   "name": "disc4js",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "author": "Bryzzen",
   "main": "dist/index.js",
   "license": "MIT",
@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/jest": "^29.2.6",
     "@types/node": "^18.11.18",
+    "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
