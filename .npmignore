@@ -4,6 +4,6 @@ yarn.lock
 
 .eslintrc.json
 .eslintignore
-
+index.d.ts
 .vscode
 .idea
