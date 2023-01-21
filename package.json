@@ -1,8 +1,8 @@
 {
   "name": "disc4js",
-  "version": "1.3.5",
+  "version": "1.3.7",
   "author": "Bryzzen",
-  "main": "./index.js",
+  "main": "./index.ts",
   "license": "MIT",
   "dependencies": {
     "bottleneck": "^2.19.5",
@@ -24,7 +24,7 @@
   },
   "typings": "./index.d.ts",
   "engines": {
-    "node": ">=10.4.0"
+    "node": ">=14.x.x"
   },
   "keywords": [
     "discord",
