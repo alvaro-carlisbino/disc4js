@@ -1,4 +1,4 @@
-import {EventEmitter} from "events";
+import { EventEmitter } from 'events';
 
 declare function Disc4js(token: string, options: Disc4js.Options): Disc4js.Client;
 
@@ -20,30 +20,30 @@ declare namespace Disc4js{
         bio?: string;
     }
 
-    export class Role{
-        id: string;
-        name: string;
-        position: number;
-        permissions: number;
-        color: number;
-        mentionable: boolean;
-        icon: string | null;
+    export class Role {
+      id: string;
+      name: string;
+      position: number;
+      permissions: number;
+      color: number;
+      mentionable: boolean;
+      icon: string | null;
     }
 
     export class Emoji {
-        name: string;
-        id: string;
-        animated: boolean;
-        available: boolean | undefined;
+      name: string;
+      id: string;
+      animated: boolean;
+      available: boolean | undefined;
     }
 
-    export class Reaction{
-        emoji: Emoji | {name: string, id: null}
-        channel: Channel;
-        message: Message | MessageDM;
-        guild?: Guild;
-        member?: Member;
-        user: User
+    export class Reaction {
+      emoji: Emoji | {name: string, id: null};
+      channel: Channel;
+      message: Message | MessageDM;
+      guild?: Guild;
+      member?: Member;
+      user: User;
     }
 
     interface ThreadOptions{
@@ -53,26 +53,26 @@ declare namespace Disc4js{
     }
 
     export class Message {
-        attachments: [];
-        component: Component[];
-        type: number;
-        tts: boolean;
-        pinned: boolean;
-        nonce: string;
-        mentions: any[]
-        guildID: string;
-        content: string;
-        channel: Channel;
-        id: string;
-        reactions: Reaction[];
+      attachments: [];
+      component: Component[];
+      type: number;
+      tts: boolean;
+      pinned: boolean;
+      nonce: string;
+      mentions: any[];
+      guildID: string;
+      content: string;
+      channel: Channel;
+      id: string;
+      reactions: Reaction[];
 
-        delete(): Promise<boolean>;
+      delete(): Promise<boolean>;
 
-        pin(): Promise<boolean>;
-        unPin(): Promise<boolean>;
+      pin(): Promise<boolean>;
+      unPin(): Promise<boolean>;
 
-        edit(content: ContentMessage): Promise<Message>;
-        startThread(options: ThreadOptions): Promise<Channel>;
+      edit(content: ContentMessage): Promise<Message>;
+      startThread(options: ThreadOptions): Promise<Channel>;
     }
 
     interface MessageReference{
@@ -168,22 +168,22 @@ declare namespace Disc4js{
         allow_new: string;
     }
 
-    export class VoiceChannel{
-        version: number;
-        type: 2;
-        rtc_region_null: string | null;
-        rate_limit_per_user: number;
-        position: number;
-        permissions: Permission[];
-        parent: Channel;
-        nsfw: boolean;
-        name: string;
-        id: string;
-        flags: number;
-        bitrate: number;
+    export class VoiceChannel {
+      version: number;
+      type: 2;
+      rtc_region_null: string | null;
+      rate_limit_per_user: number;
+      position: number;
+      permissions: Permission[];
+      parent: Channel;
+      nsfw: boolean;
+      name: string;
+      id: string;
+      flags: number;
+      bitrate: number;
 
-        join(mute: boolean, deaf: boolean): Promise<void>;
-        delete(): Promise<boolean>;
+      join(mute: boolean, deaf: boolean): Promise<void>;
+      delete(): Promise<boolean>;
     }
 
     interface InviteCreateProperties{
@@ -201,60 +201,60 @@ declare namespace Disc4js{
         invitable?: boolean;
     }
 
-    export class Channel{
-        version: string;
-        type: number;
-        position: number;
-        permissions: Permission[];
-        referenced_message: MessageReference | null;
-        parent: Channel | string;
-        nsfw: boolean;
-        name: string;
-        id: string;
-        lastMessage: string;
-        messages: Message[]
+    export class Channel {
+      version: string;
+      type: number;
+      position: number;
+      permissions: Permission[];
+      referenced_message: MessageReference | null;
+      parent: Channel | string;
+      nsfw: boolean;
+      name: string;
+      id: string;
+      lastMessage: string;
+      messages: Message[];
 
-        sendMessage(content: ContentMessage): Promise<Message>;
-        delete(): Promise<boolean>;
-        bulkDelete(number: number): Promise<boolean>;
-        createInvite(invite: InviteCreateProperties): Promise<Invite>;
-        startTyping(): Promise<boolean>;
-        startThread(options: ThreadOptionsChannel): Promise<Channel>;
+      sendMessage(content: ContentMessage): Promise<Message>;
+      delete(): Promise<boolean>;
+      bulkDelete(number: number): Promise<boolean>;
+      createInvite(invite: InviteCreateProperties): Promise<Invite>;
+      startTyping(): Promise<boolean>;
+      startThread(options: ThreadOptionsChannel): Promise<Channel>;
     }
 
-    export class LogEntry{
-        user: User;
-        target: string;
-        changes: any[];
-        guild: Guild;
+    export class LogEntry {
+      user: User;
+      target: string;
+      changes: any[];
+      guild: Guild;
     }
 
-    export class VoiceState{
-        member: Member;
-        session: string;
-        supress: boolean;
-        self_video: boolean;
-        self_mute: boolean;
-        self_deaf: boolean;
-        mute: boolean;
-        guild: Guild;
-        deaf: boolean;
-        channel: Channel;
+    export class VoiceState {
+      member: Member;
+      session: string;
+      supress: boolean;
+      self_video: boolean;
+      self_mute: boolean;
+      self_deaf: boolean;
+      mute: boolean;
+      guild: Guild;
+      deaf: boolean;
+      channel: Channel;
     }
 
-    export class Interaction{
-        version: number;
-        type: number;
-        token: string;
-        member?: Member;
-        user: User;
-        guild?: Guild;
-        channel: Channel | ChannelDM;
-        id: string;
-        data: object;
-        application_id: string;
+    export class Interaction {
+      version: number;
+      type: number;
+      token: string;
+      member?: Member;
+      user: User;
+      guild?: Guild;
+      channel: Channel | ChannelDM;
+      id: string;
+      data: object;
+      application_id: string;
 
-        reply(content: ContentMessage): Promise<Message>;
+      reply(content: ContentMessage): Promise<Message>;
     }
 
     interface EventListeners {
@@ -309,22 +309,22 @@ declare namespace Disc4js{
         created_ate: number;
     }
 
-    export class Presence{
-        status: string;
-        game?: PresenceGame[]
-        clientStatus: PresenceClientStatus
-        activities: PresenceActivities[]
+    export class Presence {
+      status: string;
+      game?: PresenceGame[];
+      clientStatus: PresenceClientStatus;
+      activities: PresenceActivities[];
     }
 
     export class User {
-        username: string;
-        tag: string;
-        bot: boolean;
-        discriminator: string;
-        publicFlags: number;
-        id: string;
-        presence?: Presence;
-        createDM(): Promise<ChannelDM>;
+      username: string;
+      tag: string;
+      bot: boolean;
+      discriminator: string;
+      publicFlags: number;
+      id: string;
+      presence?: Presence;
+      createDM(): Promise<ChannelDM>;
     }
 
     interface ModifyMemberOptions{
@@ -335,16 +335,16 @@ declare namespace Disc4js{
         channel_id?: string;
     }
 
-    export class Member{
-        nick: string;
-        avatar: string | undefined;
-        roles: Role[];
-        user: User;
-        joined_at: string;
-        deaf: boolean;
-        mute: boolean;
-        permissions: number | undefined;
-        modifyMember(options: ModifyMemberOptions): Promise<boolean>;
+    export class Member {
+      nick: string;
+      avatar: string | undefined;
+      roles: Role[];
+      user: User;
+      joined_at: string;
+      deaf: boolean;
+      mute: boolean;
+      permissions: number | undefined;
+      modifyMember(options: ModifyMemberOptions): Promise<boolean>;
     }
 
     interface BanOptions{
@@ -352,52 +352,52 @@ declare namespace Disc4js{
         delete_message_seconds: number;
     }
 
-    export class MessageDM{
-        type: number;
-        tts: boolean;
-        pinned: boolean;
-        nonce: string;
-        mentions: any[];
-        referenced_message: MessageReference | null;
-        content: string;
-        user: User;
-        reactions: Reaction[];
-        channel: ChannelDM;
+    export class MessageDM {
+      type: number;
+      tts: boolean;
+      pinned: boolean;
+      nonce: string;
+      mentions: any[];
+      referenced_message: MessageReference | null;
+      content: string;
+      user: User;
+      reactions: Reaction[];
+      channel: ChannelDM;
 
-        attachments: [];
-        component: Component[];
-        id: string;
+      attachments: [];
+      component: Component[];
+      id: string;
 
-        delete(): Promise<boolean>;
+      delete(): Promise<boolean>;
 
-        pin(): Promise<boolean>;
-        unPin(): Promise<boolean>;
-        edit(content: ContentMessage): Promise<Message>;
+      pin(): Promise<boolean>;
+      unPin(): Promise<boolean>;
+      edit(content: ContentMessage): Promise<Message>;
     }
 
-    export class ChannelDM{
-        version: string;
-        type: number;
-        name: string;
-        id: string;
-        messages: MessageDM[]
+    export class ChannelDM {
+      version: string;
+      type: number;
+      name: string;
+      id: string;
+      messages: MessageDM[];
 
-        delete(): Promise<boolean>;
+      delete(): Promise<boolean>;
 
-        sendMessage(content: ContentMessage): Promise<MessageDM>;
+      sendMessage(content: ContentMessage): Promise<MessageDM>;
     }
 
-    export class Invite{
-        uses?: number;
-        type: number;
-        max_uses?: number;
-        max_age?: number;
-        inviter: User;
-        guild: Guild;
-        code: string;
-        channel: Channel;
-        expires_at: string;
-        created_at?: string;
+    export class Invite {
+      uses?: number;
+      type: number;
+      max_uses?: number;
+      max_age?: number;
+      inviter: User;
+      guild: Guild;
+      code: string;
+      channel: Channel;
+      expires_at: string;
+      created_at?: string;
     }
 
     interface roleOptions{
@@ -410,33 +410,33 @@ declare namespace Disc4js{
         mentionable?: boolean;
     }
 
-    export class Guild{
-        id: string;
-        name: string;
-        icon: string;
-        description: string;
-        splash: string;
-        owner_id: string;
-        region: 'deprecated';
-        invites: Invite[];
-        systemChannelId: string | undefined;
-        owner: Member;
-        max_members: number;
-        explicitContentFilter: number;
-        premium_tier: number;
-        roles: Role[];
-        preferredLocal: string;
-        rulesChannelId: string;
-        nsfw: boolean;
-        embed_enabled: boolean | undefined;
-        emojis: Emoji[];
-        members: Member[];
-        channels: Channel[];
+    export class Guild {
+      id: string;
+      name: string;
+      icon: string;
+      description: string;
+      splash: string;
+      owner_id: string;
+      region: 'deprecated';
+      invites: Invite[];
+      systemChannelId: string | undefined;
+      owner: Member;
+      max_members: number;
+      explicitContentFilter: number;
+      premium_tier: number;
+      roles: Role[];
+      preferredLocal: string;
+      rulesChannelId: string;
+      nsfw: boolean;
+      embed_enabled: boolean | undefined;
+      emojis: Emoji[];
+      members: Member[];
+      channels: Channel[];
 
-        banMember(id: string, options: BanOptions): Promise<boolean>;
-        removeBan(id: string): Promise<boolean>;
-        leave(): Promise<boolean>;
-        createRole(options: roleOptions): Promise<Role | void>;
+      banMember(id: string, options: BanOptions): Promise<boolean>;
+      removeBan(id: string): Promise<boolean>;
+      leave(): Promise<boolean>;
+      createRole(options: roleOptions): Promise<Role | void>;
     }
 
     interface ClientUserOptions{
@@ -444,23 +444,23 @@ declare namespace Disc4js{
     }
 
     export class Client extends EventEmitter {
-        user: ClientUser;
-        emojis: Emoji[];
-        channels: Channel[];
-        guilds: Guild[];
-        users: User[];
-        dmchannels: ChannelDM[];
-        modifyUser(options: ClientUserOptions): Promise<boolean>;
+      user: ClientUser;
+      emojis: Emoji[];
+      channels: Channel[];
+      guilds: Guild[];
+      users: User[];
+      dmchannels: ChannelDM[];
+      modifyUser(options: ClientUserOptions): Promise<boolean>;
 
-        fetchUser(id: string): Promise<User>;
-        fetchChannel(id: string): Promise<Channel>;
-        fetchGuild(id: string): Promise<Guild>;
-        getInvite(code: string): Promise<Invite>;
-        emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
-        on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
-        on(event: string, listener: (...args: any[]) => void): this;
+      fetchUser(id: string): Promise<User>;
+      fetchChannel(id: string): Promise<Channel>;
+      fetchGuild(id: string): Promise<Guild>;
+      getInvite(code: string): Promise<Invite>;
+      emit<K extends keyof EventListeners>(event: K, ...args: EventListeners[K]): boolean;
+      on<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
+      on(event: string, listener: (...args: any[]) => void): this;
 
-        once<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
+      once<K extends keyof EventListeners>(event: K, listener: (...args: EventListeners[K]) => void): this;
     }
 }
 
