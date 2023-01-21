@@ -8,3 +8,21 @@ index.d.ts
 test.js
 .vscode
 .idea
+# Node
+node_modules
+package-lock.json
+yarn.lock
+
+# Jest
+coverage
+yarn-error.log
+jest.config.ts
+test
+
+# Eslint
+.eslintrc.json
+.eslintignore
+
+# IDEs
+.vscode
+.idea
