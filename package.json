@@ -1,6 +1,6 @@
 {
   "name": "disc4js",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "author": "Bryzzen",
   "main": "dist/index.js",
   "license": "MIT",
@@ -47,7 +47,7 @@
   },
   "scripts": {
     "lint": "eslint --fix --ext .ts",
-    "build": "ts",
+    "build": "tsc",
     "test": "jest --config=jestconfig.json",
     "coverage": "jest --config=jestconfig.json --coverage",
     "clean": "sudo rm -rf node_modules/"

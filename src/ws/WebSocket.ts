@@ -70,7 +70,7 @@ export default class WebSocket {
       this._client.emit('raw', json);
       if (t) {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        new (require(`../Events/${t.toLowerCase()}.js`))(d, this._client);
+        new (require(`../Events/${t.toLowerCase()}.js`).default)(d, this._client);
       }
     });
   }
